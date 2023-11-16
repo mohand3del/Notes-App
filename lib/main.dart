@@ -4,6 +4,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:hive_flutter/adapters.dart';
 import 'package:notes_app/bloc_observer.dart';
 import 'package:notes_app/cubit/add_note_cubit/add_notes_cubit.dart';
+import 'package:notes_app/cubit/note_cubit/notes_cubit.dart';
 import 'package:notes_app/model/notes_model.dart';
 
 import 'package:notes_app/view/screens/onbording_screen.dart';
@@ -30,16 +31,19 @@ class MyApp extends StatelessWidget {
      // designSize: const Size(450, 920),
       minTextAdapt: true,
       splitScreenMode: true,
-      builder:(_,child){ return MaterialApp(
-        debugShowCheckedModeBanner: false,
-        title: 'Notes App',
-        theme: ThemeData(
+      builder:(_,child){ return BlocProvider(
+        create: (context) => NotesCubit(),
+        child: MaterialApp(
+          debugShowCheckedModeBanner: false,
+          title: 'Notes App',
+          theme: ThemeData(
 
 
-          colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
-          useMaterial3: true,
+            colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
+            useMaterial3: true,
+          ),
+          home: const OnBoardingScreen(),
         ),
-        home: const OnBoardingScreen(),
       );
       }
     );

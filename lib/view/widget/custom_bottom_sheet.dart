@@ -1,12 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:modal_progress_hud_nsn/modal_progress_hud_nsn.dart';
-import 'package:notes_app/cubit/add_note_cubit/add_notes_cubit.dart';
-import 'package:notes_app/model/notes_model.dart';
-import 'package:notes_app/view/widget/custom_bottom.dart';
-import 'package:notes_app/view/widget/custom_text_filed.dart';
 
+import 'package:notes_app/cubit/add_note_cubit/add_notes_cubit.dart';
+
+
+import '../../cubit/note_cubit/notes_cubit.dart';
 import 'add_note_form_field.dart';
 
 class CustomBottomSheet extends StatefulWidget {
@@ -27,7 +25,9 @@ class _CustomBottomSheetState extends State<CustomBottomSheet> {
             print('error ${state.errorMessage}');
           }
           if (state is AddNotesSuccess) {
+            BlocProvider.of<NotesCubit>(context).getAllNotes();
             Navigator.pop(context);
+
           }
         },
         builder: (context, state) {
